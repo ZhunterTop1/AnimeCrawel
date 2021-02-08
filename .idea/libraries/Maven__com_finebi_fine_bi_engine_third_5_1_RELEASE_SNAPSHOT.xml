@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.finebi:fine-bi-engine-third:5.1-RELEASE-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://F:/repository/com/finebi/fine-bi-engine-third/5.1-RELEASE-SNAPSHOT/fine-bi-engine-third-5.1-RELEASE-SNAPSHOT.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://F:/repository/com/finebi/fine-bi-engine-third/5.1-RELEASE-SNAPSHOT/fine-bi-engine-third-5.1-RELEASE-SNAPSHOT-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://F:/repository/com/finebi/fine-bi-engine-third/5.1-RELEASE-SNAPSHOT/fine-bi-engine-third-5.1-RELEASE-SNAPSHOT-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
