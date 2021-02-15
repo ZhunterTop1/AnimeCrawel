@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class EnvBuilder implements IEnvBuilder {
     public Env env;
+    private boolean useLog;
 
     public EnvBuilder(){
         this.env = new Env();
@@ -24,6 +25,10 @@ public class EnvBuilder implements IEnvBuilder {
         if(cookie != null) {
             driver.getDriver();
             driver.setCookie(cookie, env.getUrl());
+            if(useLog){
+                driver.getLogDriver();
+                driver.setLogCookie(cookie, env.getUrl());
+            }
         }
         return driver;
     }
@@ -38,14 +43,14 @@ public class EnvBuilder implements IEnvBuilder {
         env.setAname(aname);
         return this;
     }
-    public IEnvBuilder setDriverClass(Class cz){
-        return setDriverClass(cz, null);
-    }
-
-
     @Override
-    public IEnvBuilder setDriverClass(Class cz, Map<String, String> cookie) {
-        env.setDriver(getDriver(cz, cookie));
+    public IEnvBuilder setDriverClass(Class cz){
+        env.setDriver(getDriver(cz, env.getCookie()));
+        return this;
+    }
+    @Override
+    public IEnvBuilder setCookie(Map<String, String> cookie){
+        env.setCookie(cookie);
         return this;
     }
 
@@ -58,6 +63,12 @@ public class EnvBuilder implements IEnvBuilder {
     @Override
     public IEnvBuilder list(List<Integer> list) {
         env.setList(list);
+        return this;
+    }
+
+    @Override
+    public IEnvBuilder setUseLog(boolean useLog) {
+        this.useLog = useLog;
         return this;
     }
 

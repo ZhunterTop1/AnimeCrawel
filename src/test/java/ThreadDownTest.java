@@ -1,10 +1,15 @@
 import org.junit.Test;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 
 /**
  * 1. 测试获取到的url是否有效
@@ -13,11 +18,11 @@ import java.net.URLConnection;
  * 4. dash.dash.audio[0].baseUrl
  * 5. cookie需要refer
  * 6. cookie设置获取大会员页面
+ * 7. 其中的bug等下载m3u8时再处理
  * */
 public class ThreadDownTest {
-String url = "https://www.bilibili.com/bangumi/play/ep375398";
-    @Test
- public void down() throws Exception {
+    static final String url = "https://xy36x151x35x230xy.mcdn.bilivideo.cn:4483/upgcxcode/74/03/279490374/279490374_nb2-1-30280.m4s?expires=1613372825&platform=pc&ssig=IufFXGEYf5W9h1eUXlpfgw&oi=2029252057&trid=4f7d0e854b72426da74131090f81dea5p&nfc=1&nfb=maPYqpoel5MI3qOUX6YpRA==&mcdnid=8000097&mid=0&orderid=0,3&agrr=1&logo=A0000080";
+    public static void main(String[] args) throws IOException, InterruptedException {
      URLConnection conn = new URL(url).openConnection();
      conn.setRequestProperty("accept", "*/*");
      conn.setRequestProperty("Accept-Language","zh-CN,zh;q=0.8");
@@ -30,17 +35,19 @@ String url = "https://www.bilibili.com/bangumi/play/ep375398";
      // 发送POST请求必须设置如下两行
      conn.setDoOutput(true);
      conn.setDoInput(true);
-     InputStream in = conn.getInputStream();
+        new Thread(new Runnable() {
+                 @Override
+                 public void run() {
+                     try {
+                         InputStream in = conn.getInputStream();
+                         Path target = Paths.get("./t.mp4");
+                         Files.copy(in, target, StandardCopyOption.REPLACE_EXISTING);
+                     } catch (IOException e) {
+                         e.printStackTrace();
+                     }
+                 }
+             }).start();
 
-     FileOutputStream f = new FileOutputStream("./t2.txt");//创建文百件度输出流
 
-     byte [] bb=new byte[1024]; //接收缓存
-     int len;
-     while( (len=in.read(bb))>0){ //接收
-         f.write(bb, 0, len); //写入问文件
-         f.flush();
-     }
-     f.close();
-     in.close();
- }
+    }
 }

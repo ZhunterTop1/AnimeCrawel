@@ -25,7 +25,10 @@ public class ServiceBuilder implements IServiceBuilder {
     public IDownUrlParse buildPlayServide() {
         switch (domain){
             case "bilibili.com":
-                return new BiliBiliDownLoad();
+//                return new BiliBiliDownLoad();
+                NormalDownLoad load = new NormalDownLoad();
+                load.setTop(2);
+                return load;
         }
         return null;
     }

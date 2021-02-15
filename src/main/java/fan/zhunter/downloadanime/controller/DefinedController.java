@@ -1,6 +1,7 @@
 package fan.zhunter.downloadanime.controller;
 
 import fan.zhunter.downloadanime.common.Binterface.IController;
+import fan.zhunter.downloadanime.common.DownLoadRequest;
 import fan.zhunter.downloadanime.common.VideoType;
 import fan.zhunter.downloadanime.service.DefinedPlayService;
 import fan.zhunter.downloadanime.util.UrlUtil;
@@ -8,6 +9,7 @@ import fan.zhunter.downloadanime.util.Utils;
 
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Set;
 
 import static fan.zhunter.downloadanime.common.VideoType.*;
 
@@ -58,12 +60,14 @@ public class DefinedController implements IController {
     @Override
     public void control() {
         DefinedPlayService service = new DefinedPlayService();
-        Map<String, Map<String, String>> downLoadUrls = service.service();
+        service.service();
+        Set<DownLoadRequest> downLoadUrls = service.getDownUrl();
+        System.out.println(downLoadUrls);
         if(Utils.isEmpty(downLoadUrls)){
             System.err.println("downLoadurl don`t get, Task Failure!!!");
             return;
         }
-        VideoType type = getType(downLoadUrls);
+//        VideoType type = getType(downLoadUrls);
 //        DownLoadParser loader = getLoader(type);
 //        IHandler handler = getHandler(type);
 //        loader.downLoad(downLoadUrls);

@@ -3,10 +3,11 @@ package fan.zhunter.downloadanime.common;
 import fan.zhunter.downloadanime.common.Binterface.IPlayService;
 
 import java.util.Map;
+import java.util.Set;
 
 public abstract class APlayService implements IPlayService {
     public APlayService successor;
-    public Map<String, Map<String, String>> downloadUrls;
+    public Set<DownLoadRequest> downloadUrls;
     public APlayService(APlayService successor){
         this.successor = successor;
     }

@@ -22,7 +22,6 @@ public class PlayService extends APlayService {
     @Override
     public void handler(Request request) {
         Map<String, String> urls = request.getUrls();
-        IDriver driver = ThreadLocalUtil.getEnv().getDriver();
         if(!request.isList()){
             if(downParser == null){
                 System.err.println("IDownUrlParse is NULL! Please setting it");

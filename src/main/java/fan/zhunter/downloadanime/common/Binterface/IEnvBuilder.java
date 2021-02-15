@@ -12,13 +12,15 @@ public interface IEnvBuilder {
 
     IEnvBuilder setAname(String aname);
 
-    IEnvBuilder setDriverClass(Class cz, Map<String, String> cookie);
-
     IEnvBuilder setDriverClass(Class cz);
+
+    IEnvBuilder setCookie(Map<String, String> cookie);
 
     IEnvBuilder isList(boolean isList);
 
     IEnvBuilder list(List<Integer> list);
+
+    IEnvBuilder setUseLog(boolean useLog);
 
     IEnvBuilder builder();
 
