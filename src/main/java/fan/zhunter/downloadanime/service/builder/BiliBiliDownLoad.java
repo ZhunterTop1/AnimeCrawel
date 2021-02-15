@@ -2,14 +2,14 @@ package fan.zhunter.downloadanime.service.builder;
 
 import fan.zhunter.downloadanime.common.Binterface.IDownUrlParse;
 import fan.zhunter.downloadanime.common.Binterface.IDriver;
+import fan.zhunter.downloadanime.common.DownLoadRequest;
 import fan.zhunter.downloadanime.util.JsonUtil;
 import fan.zhunter.downloadanime.util.PatternUtil;
 import fan.zhunter.downloadanime.util.ThreadLocalUtil;
 import fan.zhunter.downloadanime.util.Utils;
 import org.openqa.selenium.WebDriver;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
 1. 实现根据播放链接获取downloadurl的操作
@@ -20,14 +20,17 @@ import java.util.Map;
 public class BiliBiliDownLoad implements IDownUrlParse {
     WebDriver driver;
     @Override
-    public Map<String, Map<String, String>> getDownLoadUrl(Map<String, String> urls) {//cookie在一开始就设置
+    public Set<DownLoadRequest> getDownLoadUrl(Map<String, String> urls) {//cookie在一开始就设置
         IDriver iDriver = ThreadLocalUtil.getEnv().getDriver();
         driver = iDriver.getDriver();
-        HashMap<String, Map<String, String>> re = new HashMap<>();
+        Set<DownLoadRequest> re = new HashSet<>();
         for (String name : urls.keySet()){
             Map<String, String> singleDownUrl = getSingleDownUrl(urls.get(name));
             if (singleDownUrl.size() > 0) {
-                re.put(name, singleDownUrl);
+                DownLoadRequest request = new DownLoadRequest();
+                request.setUrl(new ArrayList<>(singleDownUrl.keySet()));
+                request.setPath("./" + name + "/");
+                re.add(request);
             }
         }
         return re;
@@ -54,8 +57,8 @@ public class BiliBiliDownLoad implements IDownUrlParse {
         if(Utils.isNotEmpty(json) && Utils.isNotEmpty(videoJ) && Utils.isNotEmpty(audioJ)){
             String videoUrl = JsonUtil.parse(json, videoJ);
             String audioUrl = JsonUtil.parse(json, audioJ);
-            re.put("video", videoUrl);
-            re.put("audeio", audioUrl);
+            re.put("video.m4s", videoUrl);
+            re.put("audio.m4s", audioUrl);
         }
         return re;
     }

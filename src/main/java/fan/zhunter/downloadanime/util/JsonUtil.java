@@ -19,7 +19,7 @@ import com.google.gson.JsonPrimitive;
  * */
 public class JsonUtil {
     static JsonParser parser = new JsonParser();
-    public static String parse(String raw, String jsonE){
+    public static Object parseCore(String raw, String jsonE){
         JsonObject jsonObject = parser.parse(raw).getAsJsonObject();
         char[] chars = jsonE.toCharArray();
         int n = chars.length;
@@ -46,7 +46,13 @@ public class JsonUtil {
         if (!"".equals(attr)){
             re = ((JsonObject) re).get(attr);
         }
-        return ((JsonPrimitive) re).getAsString();
-
+        return re;
+    }
+    public static String parse(String raw, String jsonE){
+        return ((JsonPrimitive) parseCore(raw, jsonE)).getAsString();
+    }
+    public static int getListSize(String json, String jsonE){
+        Object arr = parseCore(json, jsonE);
+        return ((JsonArray)arr).size();
     }
 }

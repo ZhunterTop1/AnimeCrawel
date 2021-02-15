@@ -15,7 +15,10 @@ import java.util.Map;
  * */
 public interface IDriver {
     WebDriver getDriver();
-    void closeDriver();
+    WebDriver getLogDriver();
     WebDriver getDriver(String BROWSER_PATH, String DriverPath, String UserData);
+    WebDriver getLogDriver(String BROWSER_PATH,String DriverPath,String UserData);
     void setCookie(Map<String, String> cookie,String url);
+    void setLogCookie(Map<String, String> cookie,String url);
+    void closeDriver();
 }

@@ -20,4 +20,25 @@ public class UrlUtil {
         }
         return re.substring(re.indexOf(".") + 1, re.length());
     }
+    public static String getUrl(String context) {
+        if(Utils.isEmpty(context) || ! context.contains("url")){
+            return null;
+        }
+        String pattern = PatternUtil.pattern(context,"\"url\":\".*?\"");
+        String[] split = pattern.split("\"");
+        return split[split.length-1];
+    }
+
+    public static String getRefer(String context) {
+        if(Utils.isEmpty(context) || ! context.contains("refer")){
+            return null;
+        }
+        String pattern = PatternUtil.pattern(context,"\"referer:.*?\"");
+        String[] split = pattern.split("referer: ");
+        String s = split[split.length - 1];
+        if(s == null){
+            return null;
+        }
+        return s.split("\"")[0];
+    }
 }

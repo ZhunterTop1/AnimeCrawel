@@ -28,14 +28,13 @@ public class PlayersService extends APlayService {
     @Override
     public void handler(Request request) {
         Map<String, String> urls = request.getUrls();
-        IDriver driver = ThreadLocalUtil.getEnv().getDriver();
         List<Integer> playlist = request.getList();
         if(request.isList()){
             if(listParse == null) {
                 System.err.println("IListParse is Null!Please setting it");
             }else {
                 urls = listParse.getPlayList(urls, playlist);
-                request.setList(false);
+                request.isList(false);
                 request.setUrls(urls);
             }
         }

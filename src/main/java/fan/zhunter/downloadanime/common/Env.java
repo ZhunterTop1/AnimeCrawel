@@ -15,6 +15,15 @@ public class Env {
     private IDriver driver;
     private List<Integer> list;
     private boolean isList;
+    private Map<String, String> cookie;
+
+    public Map<String, String> getCookie() {
+        return cookie;
+    }
+
+    public void setCookie(Map<String, String> cookie) {
+        this.cookie = cookie;
+    }
 
     public String getUrl() {
         return url;

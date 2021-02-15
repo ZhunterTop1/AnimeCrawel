@@ -10,7 +10,6 @@ public class Request {
     private boolean isList;
     private Map<String, String> urls;
     private List<Integer> list;
-
     public Request(){}
 
     public Request(boolean isList,Map<String, String> urls,List<Integer> list){
@@ -27,7 +26,7 @@ public class Request {
         return isList;
     }
 
-    public void setList(boolean list) {
+    public void isList(boolean list) {
         isList = list;
     }
 

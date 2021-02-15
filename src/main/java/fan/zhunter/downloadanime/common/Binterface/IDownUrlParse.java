@@ -1,9 +1,10 @@
 package fan.zhunter.downloadanime.common.Binterface;
 
-import org.openqa.selenium.WebDriver;
+import fan.zhunter.downloadanime.common.DownLoadRequest;
 
 import java.util.Map;
+import java.util.Set;
 
 public interface IDownUrlParse {
-    Map<String, Map<String, String>> getDownLoadUrl(Map<String, String> urls);
+    Set<DownLoadRequest> getDownLoadUrl(Map<String, String> urls);
 }
