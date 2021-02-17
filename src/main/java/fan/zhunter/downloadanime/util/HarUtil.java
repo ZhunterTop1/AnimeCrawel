@@ -8,15 +8,18 @@ import com.google.gson.JsonParser;
 import java.io.*;
 import java.util.*;
 
+import static fan.zhunter.downloadanime.common.config.ACrawelConfig.HarMod;
+import static fan.zhunter.downloadanime.common.config.ACrawelConfig.HarRaw;
+
 public class HarUtil {
-    //public static long offset = 10000000000000l;
-    public static Map<Long, String> getHarMap() throws IOException {
-        String path = "./p.json";
-        File file = new File(path);
-        //将一个文件变成一个字符串
-        //file最后可能以,结尾
-        modify(file);
-        BufferedReader reader = new BufferedReader(new FileReader("./a.json"));
+    public static Map<Long, String> getHarMap() throws IOException{
+        return getHarMap(null);
+    }
+    public static Map<Long, String> getHarMap(TreeMap<Long, Integer> timeline) throws IOException {
+        File in = new File(HarRaw);
+        File out = new File(HarMod);
+        modify(in, out);
+        BufferedReader reader = new BufferedReader(new FileReader(HarMod));
         JsonParser parser = new JsonParser();
         JsonObject raw = parser.parse(reader).getAsJsonObject();
         JsonArray events = raw.getAsJsonArray("events");
@@ -29,7 +32,6 @@ public class HarUtil {
             if (val.contains("params") && (hasVideo(val) || val.contains("headers"))) {
                 long id = tmp.getAsJsonObject("source").get("id").getAsLong();
                 long start_time = tmp.getAsJsonObject("source").get("start_time").getAsLong();
-//                long key = id * offset + (start + start_time);
                 String params = tmp.getAsJsonObject("params").toString();
                 String orDefault = map.getOrDefault(id,"");
                 if("".equals(orDefault)){
@@ -39,30 +41,34 @@ public class HarUtil {
             }
         }
         ArrayList<Long> longs = new ArrayList<>(map.keySet());
+        ArrayList<Long> buckets = new ArrayList<>();
+        if(Utils.isNotEmpty(timeline)){
+            buckets = new ArrayList<>(timeline.keySet());
+            Collections.sort(buckets);
+        }
         longs.sort(null);
-        HashSet<String> set = new HashSet<>();
         Map<Long, String> re = new TreeMap<>();
         for (Long key : longs) {
-            String s = map.get(key);
-            if(useful(s)){
-                String url = UrlUtil.getUrl(s);
-                if(!set.contains(url)){
-                    set.add(url);
-                    re.put(key, s);
-//                    System.out.println(key + "." + s);
+            String content = map.get(key);
+            if(hasVideo(content)){
+                if(Utils.isNotEmpty(timeline)){
+                    long startTime = Long.parseLong(content.split("\t")[0]);
+                    if(startTime < timeline.firstKey()) continue;
+                    long bucket = getBucket(buckets, startTime);
+                    System.out.println(bucket + "," + startTime + "," + content);
                 }
             }
-            //filter
         }
         return re;
     }
     public static boolean useful(String v){
-        return v.contains("MEDIUM");
+//        return v.contains("MEDIUM");
+        return v.contains(".m3u8");
     }
 
-    public static void modify(File file) throws IOException {
-        BufferedReader reader = new BufferedReader(new FileReader(file));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(new File("./a.json")));
+    public static void modify(File in, File out) throws IOException {
+        BufferedReader reader = new BufferedReader(new FileReader(in));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(out));
         String p = null;
         String before = null;
         while ((p = reader.readLine()) != null){
@@ -83,7 +89,20 @@ public class HarUtil {
         if(Utils.isEmpty(raw)) return false;
         boolean isVideo = raw.contains(".mp4") || raw.contains(".m4s") || raw.contains(",m3u8")
                 || raw.contains(".flv");
-        return isVideo && raw.contains("MEDIUM");
+        return isVideo;
+    }
+    private static long getBucket(ArrayList<Long> longs,long time) {
+        int n = longs.size();
+        int l=0,r=n-1;
+        while (l < r){
+            int mid = l + (r-l+1)/2;
+            if(longs.get(mid) > time){
+                r = mid -1;
+            }else{
+                l = mid;
+            }
+        }
+        return longs.get(l);
     }
 
     public static void main(String[] args) throws IOException {

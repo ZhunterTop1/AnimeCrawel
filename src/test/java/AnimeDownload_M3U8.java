@@ -1,16 +1,10 @@
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import fan.zhunter.downloadanime.common.FormatChromeDriver;
+import fan.zhunter.downloadanime.common.driver.FormatChromeDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.logging.LogEntries;
 import org.openqa.selenium.logging.LogEntry;
 import org.openqa.selenium.logging.LogType;
 
 import java.io.*;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.HashMap;
-import java.util.Iterator;
 
 /**
  * chromedriver

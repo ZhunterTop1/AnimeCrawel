@@ -16,7 +16,7 @@ public class Application extends Aapplication {
         //TODO 后处理视频
         //TODO 关闭
         Application application = new Application();
-        String url = "https://www.bilibili.com/bangumi/play/ep374610/?spm_id_from=333.851.b_7265706f7274466972737431.1";
+        String url = "https://www.bilibili.com/bangumi/play/ep373899";
         String aname = "ok";
         Map<String, String> cookie = application.parseCookie();
         boolean useLog = true;
@@ -25,7 +25,7 @@ public class Application extends Aapplication {
         List<Integer> list = new ArrayList<>();
         list.add(2);
         list.add(1);
-        list.add(3);
+        //list.add(3);
         application.start(url, aname, cookie, useLog, cz, isList, list);
     }
     public Map<String, String> parseCookie(){

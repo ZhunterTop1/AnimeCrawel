@@ -1,6 +1,5 @@
 package fan.zhunter.downloadanime.common.Binterface;
 
-import fan.zhunter.downloadanime.common.Env;
 import org.openqa.selenium.WebDriver;
 
 import java.util.Map;

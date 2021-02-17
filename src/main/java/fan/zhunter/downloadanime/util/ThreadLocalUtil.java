@@ -1,6 +1,6 @@
 package fan.zhunter.downloadanime.util;
 
-import fan.zhunter.downloadanime.common.Env;
+import fan.zhunter.downloadanime.common.config.Env;
 
 public class ThreadLocalUtil {
     private static ThreadLocal<Env> envLocal = new ThreadLocal<>();

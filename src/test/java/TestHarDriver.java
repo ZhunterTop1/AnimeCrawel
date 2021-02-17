@@ -1,4 +1,4 @@
-import fan.zhunter.downloadanime.common.FormatChromeDriver;
+import fan.zhunter.downloadanime.common.driver.FormatChromeDriver;
 import org.openqa.selenium.WebDriver;
 
 public class TestHarDriver {

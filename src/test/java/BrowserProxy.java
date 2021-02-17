@@ -1,4 +1,4 @@
-import fan.zhunter.downloadanime.common.ACrawelConfig;
+import fan.zhunter.downloadanime.common.config.ACrawelConfig;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;

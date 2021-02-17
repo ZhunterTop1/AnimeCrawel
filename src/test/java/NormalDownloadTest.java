@@ -1,4 +1,4 @@
-import fan.zhunter.downloadanime.service.builder.NormalDownLoad;
+import fan.zhunter.downloadanime.service.majority.NormalDownLoad;
 import org.junit.Test;
 
 import java.util.HashMap;

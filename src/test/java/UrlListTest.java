@@ -1,7 +1,6 @@
-import fan.zhunter.downloadanime.common.FormatChromeDriver;
+import fan.zhunter.downloadanime.common.driver.FormatChromeDriver;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 

@@ -1,6 +1,6 @@
 package fan.zhunter.downloadanime.common.Binterface;
 
-import fan.zhunter.downloadanime.common.Env;
+import fan.zhunter.downloadanime.common.config.Env;
 
 import java.util.List;
 import java.util.Map;

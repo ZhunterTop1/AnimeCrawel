@@ -1,22 +1,17 @@
 package fan.zhunter.downloadanime.controller;
 
-import fan.zhunter.downloadanime.common.Env;
+import fan.zhunter.downloadanime.common.config.Env;
 import fan.zhunter.downloadanime.util.ThreadLocalUtil;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.*;
 import java.util.function.Function;
@@ -54,8 +49,8 @@ public class DownLoadParser {
         URLConnection conn;
         Path out;
         boolean mark = false;
-        public Single(String url, Map<String, String> cookie, String outPath){
-            this.conn = DownLoadParser.getConnection(url,cookie);
+        public Single(String url, Map<String, String> header, String outPath){
+            this.conn = DownLoadParser.getConnection(url,header);
             try {
                 this.out = Paths.get(outPath);
                 Files.createDirectories(out.getParent());
@@ -91,7 +86,7 @@ public class DownLoadParser {
     /**
      * 将stream创建下放，使逻辑足够丝滑
      * */
-    public static URLConnection getConnection(String url, Map<String, String> cookie) {
+    public static URLConnection getConnection(String url, Map<String, String> header) {
         try {
             URLConnection conn = new URL(url).openConnection();
             conn.setRequestProperty("accept", "*/*");
@@ -101,7 +96,7 @@ public class DownLoadParser {
             conn.setRequestProperty("user-agent",
                     "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1;SV1)");
             conn.setRequestProperty("Referer","https://www.bilibili.com/bangumi/play/ep374610/?spm_id_from=333.851.b_7265706f7274466972737431.1");
-            if(cookie != null && cookie.size() > 1) conn.setRequestProperty("Cookie", parseCookie(cookie));
+            if(header != null && header.size() > 1) conn.setRequestProperty("Cookie", parseCookie(header));
             // 发送POST请求必须设置如下两行
             conn.setDoOutput(true);
             conn.setDoInput(true);
