@@ -21,7 +21,7 @@ import java.nio.file.StandardCopyOption;
  * 7. 其中的bug等下载m3u8时再处理
  * */
 public class ThreadDownTest {
-    static final String url = "https://xy36x151x35x230xy.mcdn.bilivideo.cn:4483/upgcxcode/74/03/279490374/279490374_nb2-1-30280.m4s?expires=1613372825&platform=pc&ssig=IufFXGEYf5W9h1eUXlpfgw&oi=2029252057&trid=4f7d0e854b72426da74131090f81dea5p&nfc=1&nfb=maPYqpoel5MI3qOUX6YpRA==&mcdnid=8000097&mid=0&orderid=0,3&agrr=1&logo=A0000080";
+    static String url = "https://xy221x130x79x203xy.mcdn.bilivideo.cn:4483/upgcxcode/52/48/297504852/297504852_nb2-1-30080.m4s?expires=1613405664&platform=pc&ssig=kbpI3NUBqvq3N5BYGW6zeg&oi=2029252057&trid=49bd56aac5724eb6aca03b730ccc5a24p&nfc=1&nfb=maPYqpoel5MI3qOUX6YpRA==&mcdnid=1001370&mid=195588405&orderid=0,3&agrr=0&logo=A0000001";
     public static void main(String[] args) throws IOException, InterruptedException {
      URLConnection conn = new URL(url).openConnection();
      conn.setRequestProperty("accept", "*/*");

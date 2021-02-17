@@ -2,6 +2,7 @@ package fan.zhunter.downloadanime.common;
 
 import fan.zhunter.downloadanime.common.Binterface.IController;
 import fan.zhunter.downloadanime.common.Binterface.IEnvBuilder;
+import fan.zhunter.downloadanime.common.config.EnvBuilder;
 import fan.zhunter.downloadanime.controller.DefinedController;
 
 import java.util.List;

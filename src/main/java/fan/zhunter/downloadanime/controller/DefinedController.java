@@ -1,9 +1,9 @@
 package fan.zhunter.downloadanime.controller;
 
 import fan.zhunter.downloadanime.common.Binterface.IController;
-import fan.zhunter.downloadanime.common.DownLoadRequest;
-import fan.zhunter.downloadanime.common.VideoType;
-import fan.zhunter.downloadanime.service.DefinedPlayService;
+import fan.zhunter.downloadanime.common.requets.DownLoadRequest;
+import fan.zhunter.downloadanime.common.config.VideoType;
+import fan.zhunter.downloadanime.service.worker.DefinedPlayService;
 import fan.zhunter.downloadanime.util.UrlUtil;
 import fan.zhunter.downloadanime.util.Utils;
 
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Set;
 
-import static fan.zhunter.downloadanime.common.VideoType.*;
+import static fan.zhunter.downloadanime.common.config.VideoType.*;
 
 /**
  * 1. 思考Controller的实现
@@ -63,10 +63,11 @@ public class DefinedController implements IController {
         service.service();
         Set<DownLoadRequest> downLoadUrls = service.getDownUrl();
         System.out.println(downLoadUrls);
-        if(Utils.isEmpty(downLoadUrls)){
-            System.err.println("downLoadurl don`t get, Task Failure!!!");
-            return;
-        }
+        System.exit(0);
+//        if(Utils.isEmpty(downLoadUrls)){
+//            System.err.println("downLoadurl don`t get, Task Failure!!!");
+//            return;
+//        }
 //        VideoType type = getType(downLoadUrls);
 //        DownLoadParser loader = getLoader(type);
 //        IHandler handler = getHandler(type);

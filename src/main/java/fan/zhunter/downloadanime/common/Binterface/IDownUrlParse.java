@@ -1,6 +1,6 @@
 package fan.zhunter.downloadanime.common.Binterface;
 
-import fan.zhunter.downloadanime.common.DownLoadRequest;
+import fan.zhunter.downloadanime.common.requets.DownLoadRequest;
 
 import java.util.Map;
 import java.util.Set;

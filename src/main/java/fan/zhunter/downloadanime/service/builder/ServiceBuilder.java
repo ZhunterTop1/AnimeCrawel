@@ -3,7 +3,8 @@ package fan.zhunter.downloadanime.service.builder;
 import fan.zhunter.downloadanime.common.Binterface.IDownUrlParse;
 import fan.zhunter.downloadanime.common.Binterface.IListParse;
 import fan.zhunter.downloadanime.common.Binterface.IServiceBuilder;
-import fan.zhunter.downloadanime.util.Utils;
+import fan.zhunter.downloadanime.service.m4s.BiliBiliPlayList;
+import fan.zhunter.downloadanime.service.majority.NormalDownLoad;
 
 public class ServiceBuilder implements IServiceBuilder {
     private String domain;
